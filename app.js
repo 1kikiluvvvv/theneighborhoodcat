@@ -34,6 +34,7 @@ app.use(
                 'https://cdn.jsdelivr.net',
                 'https://the-neighborhood-cat-8mka.onrender.com/',
                 'https://theneighborhoodcat.com',
+                'https://www.theneighborhoodcat.com/',
             ],
             connectSrc: [
                 'https://www.googletagmanager.com/',
@@ -42,6 +43,7 @@ app.use(
                 'http://localhost:3000',
                 'https://the-neighborhood-cat-8mka.onrender.com/',
                 'https://theneighborhoodcat.com',
+                'https://www.theneighborhoodcat.com/',
             ],
             imgSrc: ["'self'", 'data:', 'https://modelviewer.dev'],
         },
