@@ -1,0 +1,9 @@
+<div id="imageGallery" class="gallery">
+    <% for (let i=0; i < items.length; i++) { %>
+        <div class="gallery-row">
+            <div class="gallery-image-container">
+                <img class="gallery-img" src="<%= items[i].url %>" data-index="<%= i %>">
+            </div>
+        </div>
+        <% } %>
+</div>

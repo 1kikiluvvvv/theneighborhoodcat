@@ -1,0 +1,9 @@
+<div id="eventGallery" class="event-container">
+    <% for (let i=0; i < items.length; i++) { %>
+        <div class="event-row">
+            <div class="event-image-container">
+                <img class="event-img" src="<%= items[i].url %>" data-index="<%= i %>">
+            </div>
+        </div>
+        <% } %>
+</div>

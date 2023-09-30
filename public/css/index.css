@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Special Elite', cursive;
+}
+
+:root {
+    --bg-light: #fff;
+    --bg-dark: #cccc;
+
+    --accent-light: #ccc;
+    -accent-dark: #ffff;
+}
+
+body {
+    width: 100%;
+    height: auto;
+}
+
+#page-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+}
+
+
+#content-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+#hero {
+    width: 100%;
+    height: 20vh;
+}
+
+.content-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 15vh;
+
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    #content-wrapper {
+        font-size: medium;
+    }
+
+    .content-container {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        height: auto;
+    }
+}
+
+@media (max-width: 500px) {
+    #page-wrapper {
+        flex-direction: column;
+    }
+
+    #nav-wrapper {
+        width: 100%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #nav-logo {
+        height: 50%;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    #mobile-burger-container {
+        display: flex;
+    }
+
+    .nav-logo {
+        flex-direction: column;
+    }
+
+    #nav-list-container {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        right: 5vh;
+        border: 2px solid hotpink;
+        border-radius: 15px;
+    }
+
+    .mobile-nav-container {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 0;
+        z-index: -1;
+        opacity: 0;
+        font-size: xx-large;
+        transition: all 0.5s ease;
+    }
+
+    .nav-list {
+        width: auto;
+    }
+
+    .nav-list-item {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+    }
+
+    .nav-container {
+        display: none;
+    }
+
+
+    .menu-open {
+        height: 35vh;
+        z-index: 1;
+        opacity: 1;
+    }
+
+}

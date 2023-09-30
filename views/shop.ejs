@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/root.css">
+    <link rel="stylesheet" href="/public/css/shop.css">
+    <link rel="stylesheet" href="/public/css/arrow.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <title>𝚜𝚑𝚘𝚙</title>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VTG0DEXW6Y"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    // Collect User-Agent String
+    var userAgent = navigator.userAgent;
+    gtag('set', { 'user_agent': userAgent });
+
+    gtag('config', 'G-VTG0DEXW6Y');
+</script>
+
+
+<body>
+    <div id="page-wrapper">
+        <%- include('partials/navbar-partial') %>
+            <div id="content-wrapper">
+                <div id="temp-lock">
+                    <img class="lock-img" src="public/assets/shop/lock.png">
+                </div>
+                <div id="countdown"></div>
+            </div>
+            <div id="up-container">
+                <i class="up-arrow ri-arrow-up-line ri-2x"></i>
+            </div>
+    </div>
+
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="/public/js/menu.js"></script>
+    <script src="/public/js/scroll.js"></script>
+    <script src="/public/js/btn.js"></script>
+    <script src="public/js/shop.js"></script>
+
+
+
+</body>
+
+
+</html>

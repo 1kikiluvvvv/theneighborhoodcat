@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/dashboard/dashboard-main.css">
+    <link rel="stylesheet" href="/public/css/root.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <title>dashboard</title>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="nav-wrapper">
+            <div class="welcome-container">
+                <h1 class="header-text">
+                    welcome back Lya :3
+                </h1>
+            </div>
+            <div class="nav-list">
+                <div class="nav-child">
+                    <div class="btn-contain">
+                        <button id="btn1" class="btn" data-redirect="/dashboard/help">help</button>
+                    </div>
+                </div>
+                <div class="nav-child">
+                    <div class="btn-contain">
+                        <button id="btn2" class="btn" data-redirect="/logout">logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-wrapper">
+            <div class="dashboard-mainmenu">
+                <ul class="dashboard-main-list">
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/bw">edit
+                        b&w</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/color">edit
+                        color</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/events">edit
+                        events</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/shop">edit
+                        shop</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="https://analytics.google.com/analytics/web/?authuser=3#/p404549782/realtime/overview?params=_u..nav%3Dmaui">website analytics</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/help">dashboard help</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('.btn').click(function () {
+                var redirectUrl = $(this).data('redirect');
+                window.location.href = redirectUrl;
+            });
+        });
+    </script>
+</body>
+
+</html>

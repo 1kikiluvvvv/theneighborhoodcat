@@ -1,0 +1,38 @@
+.up-arrow {
+    position: relative;
+    display: flex;
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(51, 51, 51, 0.387);
+    border-radius: 50%;
+}
+
+#up-container {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+
+.arrow-show {
+    display: flex !important;
+    animation: arrow-opacity 0.5s ease forwards;
+}
+
+@keyframes arrow-opacity {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+#up-container:hover {
+    opacity: 1 !important;
+}
