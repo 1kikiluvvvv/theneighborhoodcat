@@ -32,7 +32,7 @@ app.use(
                 'https://code.jquery.com',
                 'https://unpkg.com',
                 'https://cdn.jsdelivr.net',
-                'https://lya-dev.onrender.com',
+                'https://the-neighborhood-cat-8mka.onrender.com/',
                 'https://theneighborhoodcat.com',
             ],
             connectSrc: [
@@ -40,7 +40,7 @@ app.use(
                 'https://ajax.googletagmanager.com/',
                 'https://www.google-analytics.com',
                 'http://localhost:3000',
-                'https://lya-dev.onrender.com',
+                'https://the-neighborhood-cat-8mka.onrender.com/',
                 'https://theneighborhoodcat.com',
             ],
             imgSrc: ["'self'", 'data:', 'https://modelviewer.dev'],
