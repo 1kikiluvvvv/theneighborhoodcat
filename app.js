@@ -173,7 +173,7 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
-app.post('/login', validateLogin, (req, res) => {
+app.post('/login', (req, res) => {
     const { username, password } = req.body;
     const storedUser = process.env.USERNAME; // Load the username from .env
     const hashedPassword = process.env.HASHED_PASSWORD; // Load the hashed password from .env
