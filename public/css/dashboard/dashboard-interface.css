@@ -238,6 +238,9 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
 }
 
 .images-input {
@@ -275,6 +278,7 @@
     display: flex;
     margin: 10px;
     font-size: large;
+    width: 100%;
 }
 
 #item-select {
@@ -523,9 +527,15 @@
     .btn {
         width: 100%;
     }
+    .preview-img-remove {
+        margin: 10px;
+    }
 }
 
 @media (max-width: 550px) {
+    .page-wrapper {
+        overflow-x: hidden;
+    }
     .content-container {
         flex-direction: column;
     }

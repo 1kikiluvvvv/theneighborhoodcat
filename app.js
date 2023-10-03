@@ -64,7 +64,7 @@ app.use(
         sameSite: 'strict',
         cookie: {
             maxAge: 3600000,
-            expires: 360000, // Set the maximum age to 1 hour (in milliseconds)
+            expires: 360000, 
         },
     })
 );
