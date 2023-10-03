@@ -10,6 +10,7 @@ function updateColorItems(newItem) {
       console.error(err);
       return;
     }
+    
 
     const items = JSON.parse(data);
     items.push(newItem);

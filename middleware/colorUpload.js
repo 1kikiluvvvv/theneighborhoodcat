@@ -13,6 +13,7 @@ const colorstorage = multer.diskStorage({
     },
 });
 
+
 // Create the multer upload middleware
 const uploadColor = multer({
     storage: colorstorage,

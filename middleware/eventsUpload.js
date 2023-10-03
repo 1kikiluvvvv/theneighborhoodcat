@@ -13,6 +13,8 @@ const eventsstorage = multer.diskStorage({
     },
 });
 
+
+
 // Create the multer upload middleware
 const uploadEvents = multer({
     storage: eventsstorage,

@@ -176,3 +176,4 @@ removeSelectedButton.addEventListener('click', () => {
             console.error('Error removing items:', error);
         });
 });
+

@@ -377,6 +377,7 @@ app.post('/dashboard/color/add-item', requireAuth, uploadColor.fields([
     });
 });
 
+
 // Remove Color item route
 app.post('/dashboard/color/remove-item', requireAuth, (req, res) => {
     const selectedItems = req.body.id;

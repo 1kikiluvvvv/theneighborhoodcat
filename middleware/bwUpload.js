@@ -13,6 +13,7 @@ const bwstorage = multer.diskStorage({
     },
 });
 
+
 // Create the multer upload middleware
 const uploadBw = multer({
     storage: bwstorage,

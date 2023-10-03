@@ -42,6 +42,8 @@ function updatePreview(form, imgId) {
 //     Remove Handle     //
 //-----------------------//
 
+
+
 let items; // Initialize the variable
 let selectedItems = [];
 const itemSelect = document.getElementById('item-select');
