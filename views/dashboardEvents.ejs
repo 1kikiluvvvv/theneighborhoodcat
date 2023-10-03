@@ -69,13 +69,13 @@
             <div class="content-container">
                 <div class="content-container-left">
                     <div class="control-wrapper">
-                        <form id="remove-item" action="/dashboard/events/remove-item" method="POST">
+                        <form id="remove-item">
                             <h2 style="text-decoration: underline;">remove event image</h2>
-                            <select id="item-select" name="id" required>
-                                <option>select id from list</option>
-                            </select>
+                            <div id="item-select" name="ids[]" multiple required>
+                                <!-- Populate this select input with all available items -->
+                            </div>
                             <div class="button-wrap">
-                                <button class="btn form-btn" id="edit-btn" type="submit">remove image</button>
+                                <button class="btn form-btn" id="remove-selected-btn">remove image</button>
                             </div>
                         </form>
                     </div>
@@ -85,7 +85,7 @@
                         <div class="preview-container">
                             <h2 class="preview-header">removed image preview</h2>
                             <div id="remove-preview" class="preview">
-                                <div class="preview-left">
+                                <div class="preview-gallery">
                                     <img class="preview-img" id="preview-img3"
                                         src="/public/assets/global/placeholder.jpg">
                                 </div>
@@ -118,6 +118,7 @@
         });
     </script>
     <script src="/public/js/dashboardEvents.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

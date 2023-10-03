@@ -1,7 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const app = express();
@@ -56,18 +56,22 @@ app.use(
 
 // Set up session middleware
 app.use(
-    session({
+    cookieSession({
+        name: 'session',
         secret: process.env.SESSION_KEY,
         resave: false,
         saveUninitialized: true,
+        sameSite: 'strict',
         cookie: {
-            maxAge: 3600000, // Set the maximum age to 1 hour (in milliseconds)
+            maxAge: 3600000,
+            expires: 360000, // Set the maximum age to 1 hour (in milliseconds)
         },
     })
 );
 
 // Use body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Middleware to check authentication for protected routes
 function requireAuth(req, res, next) {
@@ -77,6 +81,8 @@ function requireAuth(req, res, next) {
         res.redirect('/login');
     }
 }
+
+const { validateLogin } = require('./middleware/validateLogin');
 
 
 //------------//
@@ -167,7 +173,7 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', validateLogin, (req, res) => {
     const { username, password } = req.body;
     const storedUser = process.env.USERNAME; // Load the username from .env
     const hashedPassword = process.env.HASHED_PASSWORD; // Load the hashed password from .env
@@ -184,8 +190,16 @@ app.post('/login', (req, res) => {
             }
 
             if (result) {
-                // Successful login
-                req.session.authenticated = true;
+                // Clear the existing session cookie
+                req.session = null;
+
+                // Create a new session cookie with an extended expiration
+                req.session = {
+                    authenticated: true,
+                    cookie: {
+                        expires: new Date(Date.now() + 3600000), // Set to 1 hour from now
+                    },
+                };
                 res.redirect('dashboard');
             } else {
                 // Failed login
@@ -253,48 +267,60 @@ app.post('/dashboard/bw/add-item', requireAuth, uploadBw.fields([
         updateBwItems(newItem);
 
         // Redirect to the appropriate page
-        res.redirect('/login');
+        res.redirect('/dashboard/bw/');
     });
 });
 
 // Remove BW item route
 app.post('/dashboard/bw/remove-item', requireAuth, (req, res) => {
-    const itemId = req.body.id;
+    const selectedItems = req.body.id;
     const filePath = path.join(__dirname, 'data', 'bw.json');
+
+    console.log('Received Item IDs:', selectedItems);
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
-            console.error(err);
+            console.error('Error reading JSON file:', err);
             res.status(500).send('Error reading JSON file');
             return;
         }
 
-        const items = JSON.parse(data);
+        let items = JSON.parse(data);
 
-        // Find the index of the item in the array based on the provided itemId
-        const itemIndex = items.findIndex(item => item.id === itemId);
-        console.log('Item index:', itemIndex);
-
-        // Check if the item exists
-        if (itemIndex === -1) {
-            console.error('Item not found:', itemId);
-            res.status(404).send('Item not found');
+        // Check if itemIds is an array before iterating
+        if (!Array.isArray(selectedItems)) {
+            console.error('Invalid request: Expected an array of item IDs', selectedItems);
+            res.status(400).send('Invalid request: Expected an array of item IDs');
             return;
         }
 
-        // Remove the item from the array
-        items.splice(itemIndex, 1);
+        // Check if items is an array before performing operations
+        if (!Array.isArray(items)) {
+            console.error('JSON data is not an array');
+            res.status(500).send('JSON data is not an array');
+            return;
+        }
+
+        selectedItems.forEach(itemId => {
+            // Find the index of the item in the array based on the provided itemId
+            const itemIndex = items.findIndex(item => item.id === itemId);
+
+            if (itemIndex !== -1) {
+                // Remove the item from the array
+                items.splice(itemIndex, 1);
+            }
+        });
 
         // Write the updated JSON data back to the file
         fs.writeFile(filePath, JSON.stringify(items, null, 2), 'utf8', (err) => {
             if (err) {
-                console.error(err);
+                console.error('Error writing to JSON file:', err);
                 res.status(500).send('Error writing to JSON file');
                 return;
             }
 
-            console.log('Item removed successfully.');
-            res.redirect('/login');
+            // Redirect after writing the file successfully
+            res.redirect('/dashboard/bw/');
         });
     });
 });
@@ -347,48 +373,60 @@ app.post('/dashboard/color/add-item', requireAuth, uploadColor.fields([
         updateColorItems(newItem);
 
         // Redirect to the appropriate page
-        res.redirect('/login');
+        res.redirect('/dashboard/color/');
     });
 });
 
 // Remove Color item route
 app.post('/dashboard/color/remove-item', requireAuth, (req, res) => {
-    const itemId = req.body.id;
+    const selectedItems = req.body.id;
     const filePath = path.join(__dirname, 'data', 'color.json');
+
+    console.log('Received Item IDs:', selectedItems);
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
-            console.error(err);
+            console.error('Error reading JSON file:', err);
             res.status(500).send('Error reading JSON file');
             return;
         }
 
-        const items = JSON.parse(data);
+        let items = JSON.parse(data);
 
-        // Find the index of the item in the array based on the provided itemId
-        const itemIndex = items.findIndex(item => item.id === itemId);
-        console.log('Item index:', itemIndex);
-
-        // Check if the item exists
-        if (itemIndex === -1) {
-            console.error('Item not found:', itemId);
-            res.status(404).send('Item not found');
+        // Check if itemIds is an array before iterating
+        if (!Array.isArray(selectedItems)) {
+            console.error('Invalid request: Expected an array of item IDs', selectedItems);
+            res.status(400).send('Invalid request: Expected an array of item IDs');
             return;
         }
 
-        // Remove the item from the array
-        items.splice(itemIndex, 1);
+        // Check if items is an array before performing operations
+        if (!Array.isArray(items)) {
+            console.error('JSON data is not an array');
+            res.status(500).send('JSON data is not an array');
+            return;
+        }
+
+        selectedItems.forEach(itemId => {
+            // Find the index of the item in the array based on the provided itemId
+            const itemIndex = items.findIndex(item => item.id === itemId);
+
+            if (itemIndex !== -1) {
+                // Remove the item from the array
+                items.splice(itemIndex, 1);
+            }
+        });
 
         // Write the updated JSON data back to the file
         fs.writeFile(filePath, JSON.stringify(items, null, 2), 'utf8', (err) => {
             if (err) {
-                console.error(err);
+                console.error('Error writing to JSON file:', err);
                 res.status(500).send('Error writing to JSON file');
                 return;
             }
 
-            console.log('Item removed successfully.');
-            res.redirect('/login');
+            // Redirect after writing the file successfully
+            res.redirect('/dashboard/color/');
         });
     });
 });
@@ -442,59 +480,71 @@ app.post('/dashboard/events/add-item', requireAuth, uploadEvents.fields([
         updateEventsItems(newItem);
 
         // Redirect to the appropriate page
-        res.redirect('/login');
+        res.redirect('/dashboard/events/');
     });
 });
 
 // Remove Events item route
 app.post('/dashboard/events/remove-item', requireAuth, (req, res) => {
-    const itemId = req.body.id;
+    const selectedItems = req.body.id;
     const filePath = path.join(__dirname, 'data', 'events.json');
+
+    console.log('Received Item IDs:', selectedItems);
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
-            console.error(err);
+            console.error('Error reading JSON file:', err);
             res.status(500).send('Error reading JSON file');
             return;
         }
 
-        const items = JSON.parse(data);
+        let items = JSON.parse(data);
 
-        // Find the index of the item in the array based on the provided itemId
-        const itemIndex = items.findIndex(item => item.id === itemId);
-        console.log('Item index:', itemIndex);
-
-        // Check if the item exists
-        if (itemIndex === -1) {
-            console.error('Item not found:', itemId);
-            res.status(404).send('Item not found');
+        // Check if itemIds is an array before iterating
+        if (!Array.isArray(selectedItems)) {
+            console.error('Invalid request: Expected an array of item IDs', selectedItems);
+            res.status(400).send('Invalid request: Expected an array of item IDs');
             return;
         }
 
-        // Remove the item from the array
-        items.splice(itemIndex, 1);
+        // Check if items is an array before performing operations
+        if (!Array.isArray(items)) {
+            console.error('JSON data is not an array');
+            res.status(500).send('JSON data is not an array');
+            return;
+        }
+
+        selectedItems.forEach(itemId => {
+            // Find the index of the item in the array based on the provided itemId
+            const itemIndex = items.findIndex(item => item.id === itemId);
+
+            if (itemIndex !== -1) {
+                // Remove the item from the array
+                items.splice(itemIndex, 1);
+            }
+        });
 
         // Write the updated JSON data back to the file
         fs.writeFile(filePath, JSON.stringify(items, null, 2), 'utf8', (err) => {
             if (err) {
-                console.error(err);
+                console.error('Error writing to JSON file:', err);
                 res.status(500).send('Error writing to JSON file');
                 return;
             }
 
-            console.log('Item removed successfully.');
-            res.redirect('/login');
+            // Redirect after writing the file successfully
+            res.redirect('/dashboard/events/');
         });
     });
 });
 
 app.get('/dashboard/shop', requireAuth, (req, res) => {
-   res.render('dashboardShop')
+    res.render('dashboardShop')
 });
 
 app.get('/dashboard/help', requireAuth, (req, res) => {
     res.render('dashboardHelp')
- });
+});
 
 
 app.listen(3000, () => {

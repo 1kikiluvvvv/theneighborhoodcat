@@ -66,16 +66,19 @@
                 </div>
             </div>
 
+           
+            
             <div class="content-container">
                 <div class="content-container-left">
                     <div class="control-wrapper">
-                        <form id="remove-item" action="/dashboard/bw/remove-item" method="POST">
-                            <h2 style="text-decoration: underline;">remove b&w sheet</h2>
-                            <select id="item-select" name="id" required>
-                                <option>select id from list</option>
-                            </select>
+                        <form id="remove-item">
+                            <h2 style="text-decoration: underline;">Remove b&w sheet</h2>
+                            <div id="item-select" name="ids[]" multiple required>
+                                <!-- Populate this select input with all available items -->
+                            </div>
                             <div class="button-wrap">
-                                <button class="btn form-btn" id="edit-btn" type="submit">remove sheet</button>
+                                <button class="btn form-btn" id="remove-selected-btn">Remove
+                                    sheet</button>
                             </div>
                         </form>
                     </div>
@@ -83,9 +86,9 @@
                 <div class="content-container-right">
                     <div class="preview-wrapper">
                         <div class="preview-container">
-                            <h2 class="preview-header">removed sheet preview</h2>
+                            <h2 class="preview-header">Removed sheet Preview</h2>
                             <div id="remove-preview" class="preview">
-                                <div class="preview-left">
+                                <div class="preview-gallery">
                                     <img class="preview-img" id="preview-img3"
                                         src="/public/assets/global/placeholder.jpg">
                                 </div>
@@ -94,20 +97,25 @@
                     </div>
                 </div>
             </div>
+
+
+
+
         </div>
-        <div class="help-wrapper">
-            <div class="help-popup">
-                <div class="add-help">
+    </div>
+    <div class="help-wrapper">
+        <div class="help-popup">
+            <div class="add-help">
 
-                </div>
-                <div class="edit-help">
+            </div>
+            <div class="edit-help">
 
-                </div>
-                <div class="remove-help">
+            </div>
+            <div class="remove-help">
 
-                </div>
             </div>
         </div>
+    </div>
     </div>
     <script>
         $(document).ready(function () {
@@ -118,6 +126,7 @@
         });
     </script>
     <script src="/public/js/dashboardBw.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

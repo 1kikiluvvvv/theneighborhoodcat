@@ -40,7 +40,8 @@
             <div class="content-container">
                 <div class="content-container-left">
                     <div class="control-wrapper">
-                        <form id="add-item" action="/dashboard/color/add-item" method="POST" enctype="multipart/form-data">
+                        <form id="add-item" action="/dashboard/color/add-item" method="POST"
+                            enctype="multipart/form-data">
                             <h2 style="text-decoration: underline;">add color sheet</h2>
                             <div class="images-wrapper">
                                 <input id="image" class="input" type="file" name="image" required>
@@ -69,13 +70,14 @@
             <div class="content-container">
                 <div class="content-container-left">
                     <div class="control-wrapper">
-                        <form id="remove-item" action="/dashboard/color/remove-item" method="POST">
+                        <form id="remove-item">
                             <h2 style="text-decoration: underline;">remove color sheet</h2>
-                            <select id="item-select" name="id" required>
-                                <option>select id from list</option>
-                            </select>
+                            <div id="item-select" name="ids[]" multiple required>
+                                <!-- Populate this select input with all available items -->
+                            </div>
                             <div class="button-wrap">
-                                <button class="btn form-btn" id="edit-btn" type="submit">remove sheet</button>
+                                <button class="btn form-btn" id="remove-selected-btn">Remove
+                                    Sheet</button>
                             </div>
                         </form>
                     </div>
@@ -85,7 +87,7 @@
                         <div class="preview-container">
                             <h2 class="preview-header">removed sheet preview</h2>
                             <div id="remove-preview" class="preview">
-                                <div class="preview-left">
+                                <div class="preview-gallery">
                                     <img class="preview-img" id="preview-img3"
                                         src="/public/assets/global/placeholder.jpg">
                                 </div>
@@ -118,6 +120,7 @@
         });
     </script>
     <script src="/public/js/dashboardColor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>

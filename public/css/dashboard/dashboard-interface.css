@@ -280,6 +280,8 @@
 #item-select {
     position: relative;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 10px;
     font-size: large;
 }
@@ -300,6 +302,24 @@
     position: relative;
     display: flex;
     margin: 10px;
+    width: 3vh;
+    height: 3vh;
+    font-size: xx-large;
+}
+
+.label {
+    position: relative;
+    display: flex;
+    font-size: x-large;
+}
+
+.checkbox-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
 }
 
 
@@ -362,6 +382,13 @@
     margin: 20px;
     max-height: 90%;
     max-width: 90%;
+    box-sizing: border-box;
+}
+
+.preview-img-remove {
+    border-radius: 15px;
+    margin: 20px;
+    max-width: 40%;
     box-sizing: border-box;
 }
 
