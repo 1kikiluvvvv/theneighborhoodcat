@@ -361,7 +361,7 @@ app.get('/dashboard/bw/bw2', requireAuth, (req, res) => {
     const filePath = path.join(__dirname, 'data', 'bw2.json');
     const itemsData = fs.readFileSync(filePath, 'utf8');
     const items = JSON.parse(itemsData);
-    res.render('dashboardBw1', { items });
+    res.render('dashboardBw2', { items });
 });
 
 
