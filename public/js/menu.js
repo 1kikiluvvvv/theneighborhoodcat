@@ -1,9 +1,27 @@
+const closeBw = document.getElementById("bw-btn");
+const menuBw = document.querySelector(".sub-contain");
+
+closeBw.addEventListener("click", () => {
+  // Toggle the class on the menu element
+  menuBw.classList.toggle("sub-open");
+});
+
+const closeBwMobile = document.getElementById("bw-btn-mobile");
+const menuBwMobile = document.querySelector(".sub-contain-mobile");
+
+closeBwMobile.addEventListener("click", () => {
+  // Toggle the class on the menu element
+  menuBwMobile.classList.toggle("sub-open");
+});
+
 const closeButton = document.getElementById("burger");
 const menu = document.querySelector(".mobile-nav-container");
 
 closeButton.addEventListener("click", () => {
   // Toggle the class on the menu element
   menu.classList.toggle("menu-open");
+  menuBw.classList.remove("sub-open");
+  menuBwMobile.classList.remove("sub-open")
 
   // Toggle the class on the burger icon
   closeButton.classList.toggle("ri-close-line");
@@ -40,10 +58,10 @@ buttons.forEach(function (button) {
 
   btnColors.forEach(function (p) {
     var chars = p.textContent.split(''),
-        length = chars.length,
-        shift = -360 / length,
-        angle = 0,
-        span, t;
+      length = chars.length,
+      shift = -360 / length,
+      angle = 0,
+      span, t;
 
     p.innerHTML = chars.map(function (char) {
       return '<span>' + char + '</span>';

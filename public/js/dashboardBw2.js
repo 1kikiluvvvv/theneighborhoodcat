@@ -48,7 +48,7 @@ let items; // Initialize the variable
 let selectedItems = [];
 const itemSelect = document.getElementById('item-select');
 
-fetch('/data/bw1.json')
+fetch('/data/bw2.json')
     .then(response => response.json())
     .then(data => {
         items = data; // Assign the loaded JSON data to the 'items' variable
@@ -156,7 +156,7 @@ removeSelectedButton.addEventListener('click', () => {
     const requestBody = JSON.stringify({ id: selectedItems });
 
     // Send an HTTP request to your server to remove the selected items using Axios
-    axios.post('/dashboard/bw/bw1/remove-item', requestBody, {
+    axios.post('/dashboard/bw/bw2/remove-item', requestBody, {
         headers: {
             'Content-Type': 'application/json', // Specify content type as JSON
         },
@@ -166,7 +166,7 @@ removeSelectedButton.addEventListener('click', () => {
                 console.log('Request was successful');
                 // Handle the response here
                 // You can add a redirect here if needed
-                window.location.href = '/dashboard/bw/bw1';
+                window.location.href = '/dashboard/bw/bw2';
                 window.history.replaceState({}, document.title, window.location.pathname);
             } else {
                 // Handle the case where the removal request failed

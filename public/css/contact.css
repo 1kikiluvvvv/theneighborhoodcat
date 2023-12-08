@@ -31,282 +31,6 @@ body {
 }
 
 
-/* Nav Button */
-.shape {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    transform: scale(0.8);
-}
-
-.cir {
-    position: absolute;
-    border-radius: 50%;
-    z-index: 5;
-}
-
-.btn-contain {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav-href {
-    width: 100%;
-}
-
-.btn {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-    font-size: xx-large;
-    text-align: start;
-    background: none;
-    box-shadow: none;
-    border: none;
-    color: black;
-}
-
-.btn a {
-    color: black;
-}
-
-.btn-active {
-    text-decoration: underline;
-}
-
-.btn-particles {
-    width: 100%;
-    position: absolute;
-    border-radius: 50%;
-    color: #eee;
-    font-family: monospace;
-    z-index: 5;
-    filter: url(#gooeyness);
-}
-
-/* End Button */
-
-
-/*--------*/
-/*  Nav   */
-/*--------*/
-
-#nav-wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 25%;
-    height: 100%;
-}
-
-#mobile-burger-container {
-    display: none;
-}
-
-.mobile-nav-container {
-    display: none;
-}
-
-#nav-logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 3vh;
-}
-
-.nav-logo {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.logo {
-    max-width: 100%;
-    width: 75%;
-    transition: all 0.2s ease;
-}
-
-.logo:hover {
-    transform: translateY(3px);
-}
-
-.logo:active {
-    transform: translateY(-10px);
-}
-
-.logo-text {
-    font-size: larger;
-    width: 100%;
-    display: inline-block;
-    white-space: nowrap;
-
-}
-
-.logo-text span {
-    display: inline-block;
-    opacity: 1;
-    animation: bounce-wave 2s infinite;
-}
-
-@keyframes jump {
-    0% {
-        transform: translateY(0);
-    }
-
-    100% {
-        transform: translateY(-10px);
-    }
-}
-
-.jumpy {
-    display: flex;
-    font-size: large;
-    text-align: center;
-    letter-spacing: -.45em;
-    color: black;
-    flex-direction: row;
-}
-
-.jumpy .letter {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    text-shadow: .13em .13em 0 rgba(red, .6);
-    animation: jump 500ms infinite ease-out alternate;
-}
-
-.jumpy .letter:nth-of-type(1) {
-    animation-delay: 500ms;
-}
-
-.jumpy .letter:nth-of-type(2) {
-    animation-delay: 700ms;
-}
-
-.jumpy .letter:nth-of-type(3) {
-    animation-delay: 900ms;
-}
-
-.jumpy .letter:nth-of-type(4) {
-    animation-delay: 1100ms;
-}
-
-.jumpy .letter:nth-of-type(5) {
-    animation-delay: 1300ms;
-}
-
-.jumpy .letter:nth-of-type(6) {
-    animation-delay: 1500ms;
-}
-
-.jumpy .letter:nth-of-type(7) {
-    animation-delay: 1700ms;
-}
-
-.jumpy .letter:nth-of-type(8) {
-    animation-delay: 1900ms;
-}
-
-.jumpy .letter:nth-of-type(9) {
-    animation-delay: 2100ms;
-}
-
-.jumpy .letter:nth-of-type(10) {
-    animation-delay: 2300ms;
-}
-
-.jumpy .letter:nth-of-type(11) {
-    animation-delay: 2500ms;
-}
-
-.jumpy .letter:nth-of-type(12) {
-    animation-delay: 2700ms;
-}
-
-.jumpy .letter:nth-of-type(13) {
-    animation-delay: 2900ms;
-}
-
-.jumpy .letter:nth-of-type(14) {
-    animation-delay: 3100ms;
-}
-
-.jumpy .letter:nth-of-type(15) {
-    animation-delay: 3300ms;
-}
-
-.jumpy .letter:nth-of-type(16) {
-    animation-delay: 3500ms;
-}
-
-.jumpy .letter:nth-of-type(17) {
-    animation-delay: 3700ms;
-}
-
-.jumpy .letter:nth-of-type(18) {
-    animation-delay: 3900ms;
-}
-
-.jumpy .letter:nth-of-type(19) {
-    animation-delay: 4100ms;
-}
-
-.jumpy .letter:nth-of-type(20) {
-    animation-delay: 4300ms;
-}
-
-.nav-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-
-.nav-list {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    font-size: xx-large;
-}
-
-
-.nav-list-item {
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    color: white;
-}
-
-.nav-href {
-    position: relative;
-    display: flex;
-    width: 100%;
-    color: black;
-    transition: all 0.2s ease;
-}
-
-.nav-active {
-    color: #a28fc3;
-}
-
-.nav-href:hover {
-    text-decoration: underline;
-    transform: translateX(3px);
-    cursor: pointer;
-}
 
 
 
@@ -332,10 +56,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 25px;
 }
 
-.hero-link-container {
+.hero-link-text {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -343,6 +66,8 @@ body {
     align-items: center;
     width: 100%;
     height: auto;
+    margin-top: 3vh;
+    font-size: large;
 }
 
 .hero-link {
@@ -352,7 +77,7 @@ body {
     color: black;
     font-family: 'Special Elite', cursive;
     text-decoration: none;
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .hero-link:hover {
@@ -363,7 +88,9 @@ body {
     text-align: center;
     position: relative;
     display: flex;
-    font-size: x-large;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
     font-style: italic;
     margin-top: 2vh;
 }
@@ -388,22 +115,28 @@ body {
     margin-bottom: 1vh;
 }
 
-.hero-link {
-    color: black;
-    cursor: pointer;
-    font-size: small;
-}
 
-@media (max-width: 768px) {
+@media (max-width: 830px) {
     #content-wrapper {
         font-size: medium;
-        padding: 15px;
     }
 
     .content-container {
         margin-top: 3vh;
         margin-bottom: 3vh;
         height: auto;
+    }
+
+    #hero-text {
+        font-size: large
+    }
+
+    #hero-text2 {
+        font-size: medium;
+    }
+
+    .hero-link {
+        font-size: large
     }
 }
 
@@ -478,7 +211,11 @@ body {
     }
 
     .hero-link {
-        font-size: x-large;
+        font-size: large;
+    }
+
+    #hero-text {
+        font-size: 0.9em;
     }
 
 }

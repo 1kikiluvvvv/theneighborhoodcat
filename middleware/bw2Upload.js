@@ -1,10 +1,11 @@
+// middleware/bwUpload
 const multer = require('multer');
 const path = require('path');
 
 // Configure multer storage
-const bwstorage = multer.diskStorage({
+const bw2storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '..', 'public', 'assets', 'gallery', 'bw', 'sheets'));
+        cb(null, path.join(__dirname, '..', 'public', 'assets', 'gallery', 'bw2', 'sheets'));
     },
     filename: (req, file, cb) => {
         const extension = path.extname(file.originalname);
@@ -15,8 +16,8 @@ const bwstorage = multer.diskStorage({
 
 
 // Create the multer upload middleware
-const uploadBw = multer({
-    storage: bwstorage,
+const uploadBw2 = multer({
+    storage: bw2storage,
     fileFilter: (req, file, cb) => {
         if (file.mimetype.startsWith('image/')) {
             cb(null, true);
@@ -30,4 +31,4 @@ const uploadBw = multer({
     }
 });
 
-module.exports = uploadBw;
+module.exports = uploadBw2;

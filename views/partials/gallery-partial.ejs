@@ -1,9 +1,11 @@
 <div id="imageGallery" class="gallery">
-    <% for (let i=0; i < items.length; i++) { %>
+    <% for (let i = 0; i < items.length; i += 2) { %>
         <div class="gallery-row">
-            <div class="gallery-image-container">
-                <img class="gallery-img" src="<%= items[i].url %>" data-index="<%= i %>">
-            </div>
+            <% for (let j = i; j < i + 2 && j < items.length; j++) { %>
+                <div class="gallery-image-container">
+                    <img class="gallery-img" src="<%= items[j].url %>" data-index="<%= j %>" alt="Tattoo flash sheet">
+                </div>
+            <% } %>
         </div>
-        <% } %>
+    <% } %>
 </div>

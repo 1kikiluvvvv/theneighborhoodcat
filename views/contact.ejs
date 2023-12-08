@@ -6,22 +6,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="public/css/contact.css">
+  <link rel="stylesheet" href="public/css/cursor.css">
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-  <title>𝚌𝚘𝚗𝚝𝚊𝚌𝚝</title>
+  <title>the neighbordhood cat | contact</title>
+  <meta name="description"
+    content="Get in touch with 'The Neighborhood Cat' for your next tattoo adventure. Whether you have a design in mind or need guidance, our artist is here to bring your vision to life. Reach out today for consultations, bookings, or inquiries.">
+  <meta name="keywords"
+    content="tattoo flash, custom tattoos, theneighborhoodcat, the neighbordhood cat, tattoo art, Los Angeles tattoos, LA tattoos, LA Small Business, Los Angeles Small Business">
+  <link rel="canonical" href="https://www.theneighborhoodcat.com/contact">
+  <meta property="og:title" content="the neighbordhood cat | contact">
+  <meta property="og:description"
+    content="Get in touch with 'The Neighborhood Cat' for your next tattoo adventure. Whether you have a design in mind or need guidance, our artist is here to bring your vision to life. Reach out today for consultations, bookings, or inquiries.">
+  <meta property="og:image" content="https://www.yourwebsite.com/path-to-image.jpg">
+  <meta property="og:url" content="https://www.theneighborhoodcat.com/contact">
+  <meta property="og:type" content="website">
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VTG0DEXW6Y"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   // Collect User-Agent String
   var userAgent = navigator.userAgent;
-  gtag('set', {'user_agent': userAgent});
+  gtag('set', { 'user_agent': userAgent });
 
   gtag('config', 'G-VTG0DEXW6Y');
 </script>
@@ -29,25 +41,28 @@
 <body>
   <div id="page-wrapper">
     <%- include('partials/navbar-partial') %>
-    <div id="content-wrapper">
-      <div id="hero" class="content-container">
-        <div class="hero-link-container">
-          <i class="icon ri-instagram-line ri-2x"></i>
-          <a href="https://www.instagram.com/the_neighborhood_cat/" target="_blank"
-            class="hero-link">@the_neighborhood_cat</a>
+      <div id="content-wrapper">
+        <div id="hero" class="content-container">
+          <p id="hero-text" class="hero-text">
+            <span class="cursor"></span>
+          </p>
+          <p id="hero-text2" class="hero-link-text">
+            <i class="icon ri-instagram-line ri-2x"></i>
+            <a href="https://www.instagram.com/the_neighborhood_cat/" target="_blank"
+              class="hero-link">@the_neighborhood_cat</a>
+          </p>
         </div>
-        <p class="hero-text">DM me on instagram for all questions</p>
+        <div id="footer">
+          <p class="footer-text">powered by luvv ♡</p>
+          <a href="mailto:1kikiluvv@gmail.com" class="hero-link">1kikiluvv@gmail.com</a>
+        </div>
       </div>
-      <div id="footer">
-        <p class="footer-text">powered by luvv ♡</p>
-        <a href="mailto:1kikiluvv@gmail.com" class="hero-link">1kikiluvv@gmail.com</a>
-      </div>
-    </div>
   </div>
   <script src="public/js/menu.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="/public/js/menu.js"></script>
   <script src="public/js/btn.js"></script>
+  <script src="public/js/contact.js"></script>
 </body>
 
 </html>

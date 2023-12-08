@@ -1,0 +1,22 @@
+.cursor {
+    display: inline-block;
+    /* Align cursor with text */
+    width: 2px;
+    /* Width of the cursor */
+    height: 1em;
+    /* Height relative to the font-size of the element */
+    background-color: #000;
+    /* Cursor color */
+    margin-left: 5px;
+    /* Space between the text and cursor */
+    opacity: 1;
+    animation: blink-animation 1s steps(2, start) infinite;
+    /* Blinking animation */
+}
+
+/* Keyframes for blinking animation */
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}

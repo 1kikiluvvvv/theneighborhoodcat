@@ -64,7 +64,7 @@ app.use(
         sameSite: 'strict',
         cookie: {
             maxAge: 3600000,
-            expires: 360000, 
+            expires: 360000,
         },
     })
 );
@@ -92,8 +92,13 @@ const { validateLogin } = require('./middleware/validateLogin');
 // Public Routes
 
 app.get('/', (req, res) => {
-    const activePage = 'index';
-    const filePath = path.join(__dirname, 'data', 'bw.json');
+    res.redirect('/bw/bw1')
+});
+
+
+app.get('/bw/bw1', (req, res) => {
+    const activePage = 'bw1';
+    const filePath = path.join(__dirname, 'data', 'bw1.json');
 
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -103,7 +108,24 @@ app.get('/', (req, res) => {
         }
 
         const items = JSON.parse(data);
-        res.render('index', { items, activePage });
+        res.render('bw1', { items, activePage });
+    });
+});
+
+
+app.get('/bw/bw2', (req, res) => {
+    const activePage = 'bw2';
+    const filePath = path.join(__dirname, 'data', 'bw2.json');
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error reading JSON file');
+            return;
+        }
+
+        const items = JSON.parse(data);
+        res.render('bw2', { items, activePage });
     });
 });
 
@@ -119,7 +141,7 @@ app.get('/color', (req, res) => {
         }
 
         const items = JSON.parse(data);
-        res.render('index', { items, activePage });
+        res.render('color', { items, activePage });
     });
 });
 
@@ -220,24 +242,28 @@ app.get('/dashboard', requireAuth, (req, res) => {
     res.render('dashboard');
 });
 
-// Import necessary middleware and functions for BW
-const uploadBw = require('./middleware/bwUpload');
-const updateBwItems = require('./controllers/updateBwItems.js');
-
 app.get('/dashboard/bw', requireAuth, (req, res) => {
-    const filePath = path.join(__dirname, 'data', 'bw.json');
+    res.render('dashboardBw');
+});
+
+// Import necessary middleware and functions for BW
+const uploadBw1 = require('./middleware/bw1Upload');
+const updateBw1Items = require('./controllers/updateBw1Items.js');
+
+app.get('/dashboard/bw/bw1', requireAuth, (req, res) => {
+    const filePath = path.join(__dirname, 'data', 'bw1.json');
     const itemsData = fs.readFileSync(filePath, 'utf8');
     const items = JSON.parse(itemsData);
-    res.render('dashboardBw', { items });
+    res.render('dashboardBw1', { items });
 });
 
 
 // BW Add item route
-app.post('/dashboard/bw/add-item', requireAuth, uploadBw.fields([
+app.post('/dashboard/bw/bw1/add-item', requireAuth, uploadBw1.fields([
     { name: 'image', maxCount: 1 },
 ]), (req, res) => {
     // Calculate the next ID based on the existing items
-    const filePath = path.join(__dirname, 'data', 'bw.json');
+    const filePath = path.join(__dirname, 'data', 'bw1.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             console.error(err);
@@ -246,6 +272,8 @@ app.post('/dashboard/bw/add-item', requireAuth, uploadBw.fields([
         }
 
         let items = JSON.parse(data);
+
+        console.log('Received Items: ', items);
 
         // Calculate the next ID
         let nextId = 1; // Default to 1 if there are no existing items
@@ -260,21 +288,21 @@ app.post('/dashboard/bw/add-item', requireAuth, uploadBw.fields([
         // Create the new item object with the calculated ID and image URL
         const newItem = {
             id: nextId.toString(), // Convert to string to match existing IDs
-            url: `public/assets/gallery/bw/sheets/${image}`, // URL to the stored image
+            url: `public/assets/gallery/bw1/sheets/${image}`, // URL to the stored image
         };
 
         // Call the updateItems function to update the items with the new item data
-        updateBwItems(newItem);
+        updateBw1Items(newItem);
 
         // Redirect to the appropriate page
-        res.redirect('/dashboard/bw/');
+        res.redirect('/dashboard/bw/bw1/');
     });
 });
 
 // Remove BW item route
-app.post('/dashboard/bw/remove-item', requireAuth, (req, res) => {
+app.post('/dashboard/bw/bw1/remove-item', requireAuth, (req, res) => {
     const selectedItems = req.body.id;
-    const filePath = path.join(__dirname, 'data', 'bw.json');
+    const filePath = path.join(__dirname, 'data', 'bw1.json');
 
     console.log('Received Item IDs:', selectedItems);
 
@@ -320,7 +348,114 @@ app.post('/dashboard/bw/remove-item', requireAuth, (req, res) => {
             }
 
             // Redirect after writing the file successfully
-            res.redirect('/dashboard/bw/');
+            res.redirect('/dashboard/bw/bw1/');
+        });
+    });
+});
+
+// Import necessary middleware and functions for BW
+const uploadBw2 = require('./middleware/bw2Upload');
+const updateBw2Items = require('./controllers/updateBw2Items.js');
+
+app.get('/dashboard/bw/bw2', requireAuth, (req, res) => {
+    const filePath = path.join(__dirname, 'data', 'bw2.json');
+    const itemsData = fs.readFileSync(filePath, 'utf8');
+    const items = JSON.parse(itemsData);
+    res.render('dashboardBw1', { items });
+});
+
+
+// BW Add item route
+app.post('/dashboard/bw/bw2/add-item', requireAuth, uploadBw2.fields([
+    { name: 'image', maxCount: 1 },
+]), (req, res) => {
+    // Calculate the next ID based on the existing items
+    const filePath = path.join(__dirname, 'data', 'bw2.json');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Error reading JSON file');
+            return;
+        }
+
+        let items = JSON.parse(data);
+
+        console.log('Received Items: ', items);
+
+        // Calculate the next ID
+        let nextId = 1; // Default to 1 if there are no existing items
+        if (items.length > 0) {
+            const maxId = Math.max(...items.map(item => parseInt(item.id)));
+            nextId = maxId + 1;
+        }
+
+        // Retrieve the filenames of the uploaded files
+        const image = req.files['image'][0].filename;
+
+        // Create the new item object with the calculated ID and image URL
+        const newItem = {
+            id: nextId.toString(), // Convert to string to match existing IDs
+            url: `public/assets/gallery/bw2/sheets/${image}`, // URL to the stored image
+        };
+
+        // Call the updateItems function to update the items with the new item data
+        updateBw2Items(newItem);
+
+        // Redirect to the appropriate page
+        res.redirect('/dashboard/bw/bw2/');
+    });
+});
+
+// Remove BW item route
+app.post('/dashboard/bw/bw2/remove-item', requireAuth, (req, res) => {
+    const selectedItems = req.body.id;
+    const filePath = path.join(__dirname, 'data', 'bw2.json');
+
+    console.log('Received Item IDs:', selectedItems);
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading JSON file:', err);
+            res.status(500).send('Error reading JSON file');
+            return;
+        }
+
+        let items = JSON.parse(data);
+
+        // Check if itemIds is an array before iterating
+        if (!Array.isArray(selectedItems)) {
+            console.error('Invalid request: Expected an array of item IDs', selectedItems);
+            res.status(400).send('Invalid request: Expected an array of item IDs');
+            return;
+        }
+
+        // Check if items is an array before performing operations
+        if (!Array.isArray(items)) {
+            console.error('JSON data is not an array');
+            res.status(500).send('JSON data is not an array');
+            return;
+        }
+
+        selectedItems.forEach(itemId => {
+            // Find the index of the item in the array based on the provided itemId
+            const itemIndex = items.findIndex(item => item.id === itemId);
+
+            if (itemIndex !== -1) {
+                // Remove the item from the array
+                items.splice(itemIndex, 1);
+            }
+        });
+
+        // Write the updated JSON data back to the file
+        fs.writeFile(filePath, JSON.stringify(items, null, 2), 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing to JSON file:', err);
+                res.status(500).send('Error writing to JSON file');
+                return;
+            }
+
+            // Redirect after writing the file successfully
+            res.redirect('/dashboard/bw/bw2/');
         });
     });
 });

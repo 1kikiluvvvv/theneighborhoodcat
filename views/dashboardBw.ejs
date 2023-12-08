@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/dashboard/dashboard-interface.css">
+    <link rel="stylesheet" href="/public/css/dashboard/dashboard-main.css">
     <link rel="stylesheet" href="/public/css/root.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>b&w | dashboard</title>
 </head>
 
@@ -25,7 +25,7 @@
             <div class="nav-list">
                 <div class="nav-child">
                     <div class="btn-contain">
-                        <button id="btn1" class="btn" data-redirect="/dashboard">dashboard</button>
+                        <button id="btn1" class="btn" data-redirect="/dashboard/">back</button>
                     </div>
                 </div>
                 <div class="nav-child">
@@ -35,87 +35,18 @@
                 </div>
             </div>
         </div>
-        <div class="content-wrapper">
-
-            <div class="content-container">
-                <div class="content-container-left">
-                    <div class="control-wrapper">
-                        <form id="add-item" action="/dashboard/bw/add-item" method="POST" enctype="multipart/form-data">
-                            <h2 style="text-decoration: underline;">add b&w sheet</h2>
-                            <div class="images-wrapper">
-                                <input id="image" class="input" type="file" name="image" required>
-                            </div>
-                            <div class="button-wrap">
-                                <button class="btn form-btn" id="add-btn" type="submit">Add Item</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="content-container-right">
-                    <div class="preview-wrapper">
-                        <div class="preview-container">
-                            <h2 class="preview-header">new sheet preview</h2>
-                            <div id="add-preview" class="preview">
-                                <div class="preview-left">
-                                    <img class="preview-img" id="preview-img1"
-                                        src="/public/assets/global/placeholder.jpg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-           
-            
-            <div class="content-container">
-                <div class="content-container-left">
-                    <div class="control-wrapper">
-                        <form id="remove-item">
-                            <h2 style="text-decoration: underline;">Remove b&w sheet</h2>
-                            <div id="item-select" name="ids[]" multiple required>
-                                <!-- Populate this select input with all available items -->
-                            </div>
-                            <div class="button-wrap">
-                                <button class="btn form-btn" id="remove-selected-btn">Remove
-                                    sheet</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="content-container-right">
-                    <div class="preview-wrapper">
-                        <div class="preview-container">
-                            <h2 class="preview-header">Removed sheet Preview</h2>
-                            <div id="remove-preview" class="preview">
-                                <div class="preview-gallery">
-                                    <img class="preview-img" id="preview-img3"
-                                        src="/public/assets/global/placeholder.jpg">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-        </div>
-    </div>
-    <div class="help-wrapper">
-        <div class="help-popup">
-            <div class="add-help">
-
-            </div>
-            <div class="edit-help">
-
-            </div>
-            <div class="remove-help">
-
+        <div id="content-wrapper">
+            <div class="dashboard-mainmenu">
+                <ul class="dashboard-main-list">
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/bw/bw1">edit<br>
+                        volume 1</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/bw/bw2">edit<br>
+                        volume 2</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="https://analytics.google.com/analytics/web/?authuser=3#/p404549782/realtime/overview?params=_u..nav%3Dmaui">website analytics</li>
+                    <li class="dashboard-main-list-item btn" data-redirect="/dashboard/help">dashboard help</li>
+                </ul>
             </div>
         </div>
-    </div>
     </div>
     <script>
         $(document).ready(function () {
@@ -125,10 +56,6 @@
             });
         });
     </script>
-    <script src="/public/js/dashboardBw.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
-
-
 
 </html>

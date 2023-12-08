@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Function to update the items.json file for the add items path
-function updateBwItems(newItem) {
-  const filePath = path.join(__dirname, '..', 'data', 'bw.json');
+function updateBw1Items(newItem) {
+  const filePath = path.join(__dirname, '..', 'data', 'bw1.json');
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
@@ -11,7 +11,7 @@ function updateBwItems(newItem) {
       return;
     }
 
-    
+
     const items = JSON.parse(data);
     items.push(newItem);
 
@@ -28,6 +28,6 @@ function updateBwItems(newItem) {
 
 
 
-module.exports =  updateBwItems;
+module.exports = updateBw1Items;
 
 

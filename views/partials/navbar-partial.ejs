@@ -1,12 +1,18 @@
 <head>
     <link rel="stylesheet" href="/public/css/navbar.css">
 </head>
-<div id="nav-wrapper">
+<nav id="nav-wrapper">
     <div class="mobile-nav-container">
         <ul class="mobile-nav-list">
             <li class="nav-list-item">
                 <div class="btn-contain">
-                    <button class="btn<%= activePage === 'index' ? ' btn-active' : '' %>" data-redirect="/">b&w</button>
+                    <button id="bw-btn-mobile" class="btn">b&w</button>
+                    <div class="btn-particles"></div>
+                </div>
+                <div class="sub-contain-mobile btn-contain">
+                    <button class="btn btn-sub<%= activePage === 'bw1' ? ' btn-active ' : '' %>" data-redirect="/bw/bw1">☞ volume 1</button>
+                    <div class="btn-particles"></div>
+                    <button class="btn btn-sub<%= activePage === 'bw2' ? ' btn-active ' : '' %>" data-redirect="/bw/bw2">☞ volume 2</button>
                     <div class="btn-particles"></div>
                 </div>
             </li>
@@ -57,7 +63,7 @@
     <div id="nav-logo" class="nav-container">
         <div class="nav-logo">
 
-            <a href="/"><img class="logo" src="public/assets/global/logo.png"></a>
+            <a href="/"><img class="logo" src="/public/assets/global/logo.png" alt="The Neighborhood Cat Logo"></a>
 
             <h1 class="jumpy">
                 <span class="letter">t</span>
@@ -92,9 +98,16 @@
         <ul class="nav-list">
             <li class="nav-list-item">
                 <div class="btn-contain">
-                    <button class="btn<%= activePage === 'index' ? ' btn-active' : '' %>" data-redirect="/">b&w</button>
+                    <button id="bw-btn" class="btn">b&w</button>
                     <div class="btn-particles"></div>
                 </div>
+                <div class="btn-contain sub-contain">
+                    <button class="btn btn-sub <%= activePage === 'bw1' ? 'btn-active' : '' %>" data-redirect="/bw/bw1">☞ volume 1</button>
+                    <div class="btn-particles"></div>
+                    <button class="btn btn-sub <%= activePage === 'bw2' ? 'btn-active' : '' %>" data-redirect="/bw/bw2">☞ volume 2</button>
+                    <div class="btn-particles"></div>
+                </div>
+                
             </li>
             <li class="nav-list-item">
                 <div class="btn-contain">
@@ -140,4 +153,4 @@
             </li>
         </ul>
     </div>
-</div>
+</nav>

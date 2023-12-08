@@ -8,15 +8,24 @@ body {
     width: 100%;
     height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.flash-header {
+    font-size: xx-large;
+    text-decoration: underline;
+    width: 100%;
+    padding: 15px 15px 0;
+    text-align: left;
 }
 
 .flash-text {
     font-size: small;
     width: 50%;
     padding: 15px;
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -90,7 +99,7 @@ body {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 725px) {
     #page-wrapper {
         flex-direction: column;
     }
