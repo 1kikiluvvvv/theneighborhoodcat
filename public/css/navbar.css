@@ -20,7 +20,7 @@
 
 .mobile-nav-container {
     display: none;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 #nav-logo {
@@ -243,13 +243,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    
 }
 
 .sub-contain,
 .sub-contain-mobile {
     height: 0;
     opacity: 0;
+    z-index: 0;
     transition: all 0.5s ease;
 }
 
@@ -272,10 +273,12 @@
     box-shadow: none;
     border: none;
     color: black;
+    z-index: 1;
 }
 
 .btn-sub {
     font-size: x-large;
+    z-index: -99999;
 }
 
 .btn a {
@@ -359,7 +362,7 @@
     }
 
     .menu-open {
-        height: 55vh;
+        height: 65vh;
         z-index: 1;
         opacity: 1;
     }
@@ -374,5 +377,17 @@
 @media (max-width: 400px) {
     .logo {
         width: 70%;
+    }
+}
+
+@media (max-height: 840px) {
+    .sub-open {
+        height: 9vh;
+    }
+}
+
+@media (max-height: 675px) {
+    .sub-open {
+        height: 10vh;
     }
 }

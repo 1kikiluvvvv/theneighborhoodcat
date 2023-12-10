@@ -93,6 +93,10 @@ const { validateLogin } = require('./middleware/validateLogin');
 
 app.get('/', (req, res) => {
     res.redirect('/bw/bw1')
+    /*
+    const activePage = 'index';
+    res.render('index', { activePage });
+    */
 });
 
 
