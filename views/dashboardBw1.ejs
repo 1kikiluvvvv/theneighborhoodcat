@@ -40,7 +40,8 @@
             <div class="content-container">
                 <div class="content-container-left">
                     <div class="control-wrapper">
-                        <form id="add-item" action="/dashboard/bw/bw1/add-item" method="POST" enctype="multipart/form-data">
+                        <form id="add-item" action="/dashboard/bw/bw1/add-item" method="POST"
+                            enctype="multipart/form-data">
                             <h2 style="text-decoration: underline;">add b&w sheet</h2>
                             <div class="images-wrapper">
                                 <input id="image" class="input" type="file" name="image" required>
@@ -72,12 +73,12 @@
                 <div class="content-container-left">
                     <div class="control-wrapper">
                         <form id="remove-item">
-                            <h2 style="text-decoration: underline;">Remove b&w sheet</h2>
+                            <h2 style="text-decoration: underline;">remove b&w sheet</h2>
                             <div id="item-select" name="ids[]" multiple required>
                                 <!-- Populate this select input with all available items -->
                             </div>
                             <div class="button-wrap">
-                                <button class="btn form-btn" id="remove-selected-btn">Remove
+                                <button class="btn form-btn" id="remove-selected-btn">remove
                                     sheet</button>
                             </div>
                         </form>
@@ -86,7 +87,7 @@
                 <div class="content-container-right">
                     <div class="preview-wrapper">
                         <div class="preview-container">
-                            <h2 class="preview-header">Removed sheet Preview</h2>
+                            <h2 class="preview-header">removed sheet Preview</h2>
                             <div id="remove-preview" class="preview">
                                 <div class="preview-gallery">
                                     <img class="preview-img" id="preview-img3"
@@ -97,6 +98,30 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="content-container">
+                <div class="content-container-left">
+                    <div class="control-wrapper">
+                        <div id="download-item">
+                            <h2 style="text-decoration: underline;">download data</h2>
+                            <div class="button-wrap">
+                                <button type="button" class="download-btn" id="download-button">download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-container-right">
+                    <div class="preview-wrapper">
+                        <div class="preview-container">
+                            <h2 class="preview-header">downloaded data</h2>
+                            <h3 id="download-preview"><!--Load the item paths here--></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
     <div class="help-wrapper">
@@ -121,7 +146,7 @@
             });
         });
     </script>
-    <script src="/public/js/dashboardBw.js"></script>
+    <script  src="/public/js/dashboardBw.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 

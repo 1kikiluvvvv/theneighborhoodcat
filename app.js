@@ -7,13 +7,17 @@ require('dotenv').config();
 const app = express();
 const helmet = require('helmet');
 const bcrypt = require('bcrypt');
-
+const archiver = require('archiver');
+const crypto = require('crypto');
+const nonce = crypto.randomBytes(16).toString('base64');
 
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use('/public', express.static('public'));
 app.use('/data', express.static('data'));
+
+
 
 
 // Use Helmet middleware with CSP configuration
@@ -262,6 +266,60 @@ app.get('/dashboard/bw/bw1', requireAuth, (req, res) => {
 });
 
 
+// POST route for handling the download request
+app.post('/dashboard/bw/bw1/download', requireAuth, (req, res) => {
+    console.log('post on bw1/bw1/download');
+
+    // Create a zip file on the fly
+    const archive = archiver('zip');
+    const zipFileName = 'bw1_data.zip';
+
+    // Set the content-disposition header to prompt the user to download the file
+    res.attachment(zipFileName);
+
+    // Create a buffer to store the archived data
+    const buffer = [];
+
+    // Add the JSON file to the zip
+    const jsonFilePath = path.join(__dirname, 'data', 'bw1.json');
+    archive.append(fs.createReadStream(jsonFilePath), { name: 'bw1.json' });
+
+    // Add images to the zip (replace 'imagePath' with your actual image path)
+    const imagePath = path.join(__dirname, 'public', 'assets', 'gallery', 'bw1', 'sheets');
+    const imageFiles = fs.readdirSync(imagePath);
+
+    imageFiles.forEach((file) => {
+        const imageFilePath = path.join(imagePath, file);
+        archive.file(imageFilePath, { name: `images/${file}` });
+    });
+
+    // Handle any errors during the archiving process
+    archive.on('error', (err) => {
+        console.error('Error during archive finalization:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    });
+
+    // Register an event listener for the data event
+    archive.on('data', (chunk) => {
+        // Push chunks into the buffer
+        buffer.push(chunk);
+    });
+
+    // Register an event listener for the end event
+    archive.on('end', () => {
+        // Combine the buffer into a single Buffer
+        const dataBuffer = Buffer.concat(buffer);
+
+        // Send the Buffer as the response
+        res.end(dataBuffer, 'binary'); // Specify encoding as binary
+    });
+
+    // Finalize the archive
+    archive.finalize();
+});
+
+
+
 // BW Add item route
 app.post('/dashboard/bw/bw1/add-item', requireAuth, uploadBw1.fields([
     { name: 'image', maxCount: 1 },
@@ -357,6 +415,9 @@ app.post('/dashboard/bw/bw1/remove-item', requireAuth, (req, res) => {
     });
 });
 
+
+
+
 // Import necessary middleware and functions for BW
 const uploadBw2 = require('./middleware/bw2Upload');
 const updateBw2Items = require('./controllers/updateBw2Items.js');
@@ -366,6 +427,58 @@ app.get('/dashboard/bw/bw2', requireAuth, (req, res) => {
     const itemsData = fs.readFileSync(filePath, 'utf8');
     const items = JSON.parse(itemsData);
     res.render('dashboardBw2', { items });
+});
+
+// POST route for handling the download request
+app.post('/dashboard/bw/bw2/download', requireAuth, (req, res) => {
+    console.log('post on bw/bw2/download');
+
+    // Create a zip file on the fly
+    const archive = archiver('zip');
+    const zipFileName = 'bw2_data.zip';
+
+    // Set the content-disposition header to prompt the user to download the file
+    res.attachment(zipFileName);
+
+    // Create a buffer to store the archived data
+    const buffer = [];
+
+    // Add the JSON file to the zip
+    const jsonFilePath = path.join(__dirname, 'data', 'bw2.json');
+    archive.append(fs.createReadStream(jsonFilePath), { name: 'bw2.json' });
+
+    // Add images to the zip (replace 'imagePath' with your actual image path)
+    const imagePath = path.join(__dirname, 'public', 'assets', 'gallery', 'bw2', 'sheets');
+    const imageFiles = fs.readdirSync(imagePath);
+
+    imageFiles.forEach((file) => {
+        const imageFilePath = path.join(imagePath, file);
+        archive.file(imageFilePath, { name: `images/${file}` });
+    });
+
+    // Handle any errors during the archiving process
+    archive.on('error', (err) => {
+        console.error('Error during archive finalization:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    });
+
+    // Register an event listener for the data event
+    archive.on('data', (chunk) => {
+        // Push chunks into the buffer
+        buffer.push(chunk);
+    });
+
+    // Register an event listener for the end event
+    archive.on('end', () => {
+        // Combine the buffer into a single Buffer
+        const dataBuffer = Buffer.concat(buffer);
+
+        // Send the Buffer as the response
+        res.end(dataBuffer, 'binary'); // Specify encoding as binary
+    });
+
+    // Finalize the archive
+    archive.finalize();
 });
 
 
@@ -477,6 +590,59 @@ app.get('/dashboard/color', requireAuth, (req, res) => {
 });
 
 
+// POST route for handling the download request
+app.post('/dashboard/color/download', requireAuth, (req, res) => {
+    console.log('post on color/download');
+
+    // Create a zip file on the fly
+    const archive = archiver('zip');
+    const zipFileName = 'color_data.zip';
+
+    // Set the content-disposition header to prompt the user to download the file
+    res.attachment(zipFileName);
+
+    // Create a buffer to store the archived data
+    const buffer = [];
+
+    // Add the JSON file to the zip
+    const jsonFilePath = path.join(__dirname, 'data', 'color.json');
+    archive.append(fs.createReadStream(jsonFilePath), { name: 'color.json' });
+
+    // Add images to the zip (replace 'imagePath' with your actual image path)
+    const imagePath = path.join(__dirname, 'public', 'assets', 'gallery', 'color', 'sheets');
+    const imageFiles = fs.readdirSync(imagePath);
+
+    imageFiles.forEach((file) => {
+        const imageFilePath = path.join(imagePath, file);
+        archive.file(imageFilePath, { name: `images/${file}` });
+    });
+
+    // Handle any errors during the archiving process
+    archive.on('error', (err) => {
+        console.error('Error during archive finalization:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    });
+
+    // Register an event listener for the data event
+    archive.on('data', (chunk) => {
+        // Push chunks into the buffer
+        buffer.push(chunk);
+    });
+
+    // Register an event listener for the end event
+    archive.on('end', () => {
+        // Combine the buffer into a single Buffer
+        const dataBuffer = Buffer.concat(buffer);
+
+        // Send the Buffer as the response
+        res.end(dataBuffer, 'binary'); // Specify encoding as binary
+    });
+
+    // Finalize the archive
+    archive.finalize();
+});
+
+
 // Color Add item route
 app.post('/dashboard/color/add-item', requireAuth, uploadColor.fields([
     { name: 'image', maxCount: 1 },
@@ -584,6 +750,57 @@ app.get('/dashboard/events', requireAuth, (req, res) => {
     res.render('dashboardEvents', { items });
 });
 
+// POST route for handling the download request
+app.post('/dashboard/events/download', requireAuth, (req, res) => {
+    console.log('post on events/download');
+
+    // Create a zip file on the fly
+    const archive = archiver('zip');
+    const zipFileName = 'events_data.zip';
+
+    // Set the content-disposition header to prompt the user to download the file
+    res.attachment(zipFileName);
+
+    // Create a buffer to store the archived data
+    const buffer = [];
+
+    // Add the JSON file to the zip
+    const jsonFilePath = path.join(__dirname, 'data', 'events.json');
+    archive.append(fs.createReadStream(jsonFilePath), { name: 'bw1.json' });
+
+    // Add images to the zip (replace 'imagePath' with your actual image path)
+    const imagePath = path.join(__dirname, 'public', 'assets', 'events');
+    const imageFiles = fs.readdirSync(imagePath);
+
+    imageFiles.forEach((file) => {
+        const imageFilePath = path.join(imagePath, file);
+        archive.file(imageFilePath, { name: `images/${file}` });
+    });
+
+    // Handle any errors during the archiving process
+    archive.on('error', (err) => {
+        console.error('Error during archive finalization:', err);
+        res.status(500).json({ message: 'Internal server error' });
+    });
+
+    // Register an event listener for the data event
+    archive.on('data', (chunk) => {
+        // Push chunks into the buffer
+        buffer.push(chunk);
+    });
+
+    // Register an event listener for the end event
+    archive.on('end', () => {
+        // Combine the buffer into a single Buffer
+        const dataBuffer = Buffer.concat(buffer);
+
+        // Send the Buffer as the response
+        res.end(dataBuffer, 'binary'); // Specify encoding as binary
+    });
+
+    // Finalize the archive
+    archive.finalize();
+});
 
 // Events Add item route
 app.post('/dashboard/events/add-item', requireAuth, uploadEvents.fields([

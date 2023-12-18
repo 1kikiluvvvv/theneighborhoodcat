@@ -1,3 +1,50 @@
+// bw1.js
+document.getElementById('download-button').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent the default behavior of the button click
+    console.log('Preparing to download');
+    downloadData();
+});
+
+function downloadData() {
+    // Make an AJAX POST request to the server using Axios
+    console.log('Download started.');
+    document.getElementById('download-preview').innerText = 'Download started.';
+    axios.post('/dashboard/bw/bw1/download', {}, { responseType: 'arraybuffer' })  // Add responseType to the config
+        .then(response => {
+            // Check if the response is an arraybuffer (binary data)
+            if (response.data instanceof ArrayBuffer) {
+                // Convert the arraybuffer to a Blob
+                const blob = new Blob([response.data]);
+
+                // Trigger the download by creating a temporary link
+                console.log('Received Blob response, triggering download');
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'bw1_data.zip');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Update the download preview with the received data
+                console.log('Download complete.');
+                document.getElementById('download-preview').innerText = 'Download complete.';
+            } else {
+                console.error('Invalid response:', response);
+                // Handle the case where the response is not as expected
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error if needed
+        });
+}
+
+
+
+
+
+
 
 //------------------//
 //    Add  Handle   //
